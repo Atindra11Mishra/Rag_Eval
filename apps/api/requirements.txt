@@ -1,0 +1,32 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+pydantic==2.9.2
+pydantic-settings==2.5.2
+python-dotenv==1.0.1
+
+# Document parsing
+pymupdf==1.24.10
+
+# LangChain + ChromaDB
+langchain==0.3.1
+langchain-openai==0.2.1
+langchain-community==0.3.1
+langchain-chroma==0.1.4
+chromadb==0.5.11
+
+# Lexical retrieval (Phase 2, installed now for completeness)
+rank-bm25==0.2.2
+
+# Reranker (Phase 4, installed now)
+sentence-transformers==3.1.1
+
+# OpenAI
+openai==1.51.0
+
+# Evaluation (Phase 5)
+ragas==0.1.21
+datasets==2.21.0
+
+# Supabase (Phase 7)
+supabase==2.9.0

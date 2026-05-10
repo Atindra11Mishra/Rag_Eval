@@ -1,0 +1,25 @@
+{
+  "version": "v1",
+  "description": "Initial benchmark dataset. Replace questions/answers with ones specific to your uploaded documents.",
+  "questions": [
+    {
+      "id": "q001",
+      "question": "What is the main topic of the document?",
+      "reference_answer": "The document covers [REPLACE WITH YOUR DOCUMENT TOPIC].",
+      "expected_sources": []
+    },
+    {
+      "id": "q002",
+      "question": "What are the key findings or conclusions?",
+      "reference_answer": "The key findings are [REPLACE WITH ACTUAL FINDINGS].",
+      "expected_sources": []
+    },
+    {
+      "id": "q003",
+      "question": "Who is the intended audience for this document?",
+      "reference_answer": "[REPLACE WITH ACTUAL AUDIENCE].",
+      "expected_sources": []
+    }
+  ],
+  "notes": "This is a template benchmark. Populate with 30–100 real questions after uploading your documents. Cover: exact keyword queries, paraphrased semantic queries, multi-part questions, section-specific lookups."
+}
