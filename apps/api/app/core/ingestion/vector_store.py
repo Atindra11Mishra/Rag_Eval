@@ -3,11 +3,11 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
+from typing import Any
 
 import chromadb
 from langchain_chroma import Chroma
 from langchain_core.embeddings import Embeddings
-from sentence_transformers import SentenceTransformer
 
 from app.config import settings
 from app.core.ingestion.chunker import Chunk
@@ -16,13 +16,15 @@ logger = logging.getLogger(__name__)
 
 _chroma_client: chromadb.PersistentClient | None = None
 _vector_store: Chroma | None = None
-_embedding_model: SentenceTransformer | None = None
+_embedding_model: Any | None = None
 
 
 class LocalSentenceTransformerEmbeddings(Embeddings):
-    def _get_model(self) -> SentenceTransformer:
+    def _get_model(self) -> Any:
         global _embedding_model
         if _embedding_model is None:
+            from sentence_transformers import SentenceTransformer
+
             logger.info("Loading embedding model: %s", settings.embedding_model)
             _embedding_model = SentenceTransformer(settings.embedding_model)
         return _embedding_model

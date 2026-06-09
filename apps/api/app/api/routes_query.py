@@ -5,12 +5,6 @@ import logging
 from fastapi import APIRouter, HTTPException
 
 from app.config import settings
-from app.core.retrieval.vector_retriever import retrieve_vector
-from app.core.retrieval.bm25_retriever import retrieve_bm25
-from app.core.retrieval.hybrid_retriever import retrieve_hybrid
-from app.core.reranking.reranker import rerank
-from app.core.generation.generator import generate_answer
-from app.core.telemetry.logger import log_query
 from app.schemas.query import (
     QueryRequest,
     QueryResponse,
@@ -44,6 +38,13 @@ def _to_schema(chunks: list[dict]) -> list[RetrievedChunk]:
 
 @router.post("/query", response_model=QueryResponse)
 def query_documents(request: QueryRequest):
+    from app.core.generation.generator import generate_answer
+    from app.core.reranking.reranker import rerank
+    from app.core.retrieval.bm25_retriever import retrieve_bm25
+    from app.core.retrieval.hybrid_retriever import retrieve_hybrid
+    from app.core.retrieval.vector_retriever import retrieve_vector
+    from app.core.telemetry.logger import log_query
+
     question = request.question.strip()
     if not question:
         raise HTTPException(status_code=400, detail="Question must not be empty.")

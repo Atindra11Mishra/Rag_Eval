@@ -6,7 +6,6 @@ from pathlib import Path
 from fastapi import APIRouter, UploadFile, File, HTTPException
 
 from app.config import settings
-from app.core.ingestion.pipeline import ingest_file
 from app.schemas.upload import UploadResponse
 
 logger = logging.getLogger(__name__)
@@ -38,7 +37,10 @@ async def upload_document(file: UploadFile = File(...)):
     finally:
         await file.close()
 
-    # Run ingestion pipeline
+    # Run ingestion pipeline. Imported lazily so API startup stays fast on hosts
+    # with small instances and heavyweight ML dependencies.
+    from app.core.ingestion.pipeline import ingest_file
+
     result = ingest_file(dest)
 
     return UploadResponse(
