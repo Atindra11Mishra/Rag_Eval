@@ -16,7 +16,13 @@ _client: OpenAI | None = None
 def _get_client() -> OpenAI:
     global _client
     if _client is None:
-        _client = OpenAI(api_key=settings.openai_api_key)
+        api_key = settings.llm_api_key or settings.openai_api_key
+        if not api_key:
+            raise RuntimeError(
+                "LLM_API_KEY is not configured. Add a Groq, NVIDIA NIM, or "
+                "OpenAI-compatible key to apps/api/.env before querying documents."
+            )
+        _client = OpenAI(api_key=api_key, base_url=settings.llm_base_url)
     return _client
 
 

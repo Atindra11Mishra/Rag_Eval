@@ -6,20 +6,20 @@ Reranking runs on CPU by default; set device="cuda" if a GPU is available.
 """
 import time
 import logging
-from typing import Optional
-
-from sentence_transformers import CrossEncoder
+from typing import Any
 
 from app.config import settings
 
 logger = logging.getLogger(__name__)
 
-_model: Optional[CrossEncoder] = None
+_model: Any | None = None
 
 
-def _get_model() -> CrossEncoder:
+def _get_model() -> Any:
     global _model
     if _model is None:
+        from sentence_transformers import CrossEncoder
+
         logger.info("Loading reranker model: %s", settings.reranker_model)
         _model = CrossEncoder(settings.reranker_model, max_length=512)
         logger.info("Reranker model loaded.")

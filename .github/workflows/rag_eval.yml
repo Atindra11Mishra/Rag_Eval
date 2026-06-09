@@ -24,7 +24,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.13"
           cache: "pip"
           cache-dependency-path: apps/api/requirements.txt
 
@@ -35,16 +35,19 @@ jobs:
       - name: Write .env for CI
         working-directory: apps/api
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
           cat > .env <<EOF
-          OPENAI_API_KEY=${OPENAI_API_KEY}
+          LLM_API_KEY=${LLM_API_KEY}
+          LLM_BASE_URL=https://api.groq.com/openai/v1
+          LLM_MODEL=openai/gpt-oss-120b
+          EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
           SUPABASE_URL=${SUPABASE_URL}
           SUPABASE_KEY=${SUPABASE_KEY}
           RETRIEVAL_MODE=hybrid
-          RERANKER_ENABLED=true
+          RERANKER_ENABLED=false
           EOF
 
       - name: Run benchmark

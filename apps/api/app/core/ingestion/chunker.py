@@ -1,7 +1,7 @@
 """Text chunking with configurable size and overlap."""
 import uuid
 from dataclasses import dataclass, field
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 @dataclass

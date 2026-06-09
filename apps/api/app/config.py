@@ -12,9 +12,11 @@ class Settings(BaseSettings):
     )
 
     # LLM
-    openai_api_key: str
+    openai_api_key: str = ""
+    llm_api_key: str = ""
+    llm_base_url: str = "https://api.openai.com/v1"
     llm_model: str = "gpt-4o-mini"
-    embedding_model: str = "text-embedding-3-small"
+    embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
 
     # Retrieval
     # Mode options: "vector" | "bm25" | "hybrid"
@@ -43,6 +45,8 @@ class Settings(BaseSettings):
     chroma_collection_name: str = "rag_chunks"
 
     # Supabase (Phase 7 — optional now)
+    allowed_origins: str = "*"
+
     supabase_url: str = ""
     supabase_key: str = ""
 

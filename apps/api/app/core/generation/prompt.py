@@ -12,7 +12,7 @@ Rules:
 
 def build_prompt(query: str, chunks: list[dict]) -> list[dict]:
     """
-    Build a message list for the OpenAI chat completions API.
+    Build a message list for an OpenAI-compatible chat completions API.
 
     chunks: list of dicts with keys 'text', 'metadata', 'score'
     """
