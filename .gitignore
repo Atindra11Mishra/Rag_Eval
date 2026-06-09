@@ -20,3 +20,5 @@ data/raw/
 data/chroma/
 apps/api/data/raw/
 apps/api/data/chroma/
+
+.vercel
